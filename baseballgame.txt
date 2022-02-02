@@ -1,0 +1,164 @@
+//숫자야구게임만들기
+
+//과제사용자이름을입력받아, 게임에서이기면사용자이름을입력받는함수
+//횟수저장, 제일적은사람부터둘다구조체배열을이용하여
+//,
+
+#define MAX_SIZE 3// 배열의범위3
+#define CMD_START 1//게임시작
+#define CMD_QUIT 2//게임종료
+#define SIZE 4
+
+#include<stdio.h>
+#include<stdlib.h>//난수함수를위해
+#include<time.h>
+
+int guesswhat[MAX_SIZE] = { 0 };//숫자야구
+int userhit[MAX_SIZE] = { 0 };
+int trials = 0;//시도횟수
+
+int get_strike(int *answer, int *user);
+int get_ball(int *answer, int *user);
+int create_num();//난수생성
+int create_game();
+
+struct player {//구조체
+	char name[24];//이름
+	int score;
+	int rank;//순위
+};
+
+int main() {
+	srand((unsigned int)time(NULL));//난수생성시초기화시킴
+	struct player playlist[SIZE];
+	int i;
+	int cnt = 0;
+
+	create_game();
+	while (1) {
+		int cmd;
+
+		printf("**********************************\n");
+		printf("*    게임을시작하시겠습니까);
+			printf("*        1. 시작                *\n");
+		printf("*        2. 종료                *\n");
+		printf("**********************************\n");
+		printf("게임을시작하시겠습니까);
+		scanf("%d", &cmd);
+		trials = 0;
+
+		if (cmd == CMD_START) {
+			printf("플레이어의이름을입력하시오: ");
+			scanf("%s", playlist[SIZE].name);
+		}
+
+		else if (cmd == CMD_QUIT) {
+			printf("게임을종료합니다.\n\n\n");
+			break
+		}
+
+		int j
+		for (i = 0; i<cnt; i++) {
+			playlist[i].rank = 1;
+			for (j = 0; j <= cnt; j++) {
+				if (playlist[i].score > playlist[j].score)
+					cnt++;
+			}
+		}
+
+		while (1) {
+			int strikes;
+			int balls;
+			int i;
+			int j;
+
+			printf("당신이생각하는%d개의숫자를넣으십시오.\n =>", MAX_SIZE);
+			for (i = 0; i < MAX_SIZE i++) {
+				scanf("%d", &userhit[i]);
+			}
+
+			trials++;
+
+			strikes = get_strike(guesswhat, userhit);
+			balls = get_ball(guesswhat, userhit);
+
+			if (strikes == 0 && balls == 0) {
+				printf("OUT! \n");
+			}
+
+			if (strikes == 3) {
+				printf("게임을클리어하셨습니다! \n");
+				printf("%s님게임을멋지게클리어하셨습니다. %s님의시도횟수는%d번입니다.\n\n\n\n\n", playlist[SIZE].name, playlist[SIZE].name, trials);
+				//시.도횟수
+				break
+			}
+
+			else {
+				printf("%d Strike(스트라이크) - %d Ball(볼)\n", strikes, balls);
+			}
+
+			printf("현재시도횟수는%d번입니다. \n\n", trials);
+		}
+	}
+
+	for (i = 0; i < cnt; i++)
+	{
+		printf("%d등%s님, 시도횟수%d\n", playlist[i].rank, playlist[i].name, playlist[i].score);
+	}          // 랭킹출력
+
+	return 0;
+}
+
+int get_strike(int *answer, int *user) {
+	int i;//제어변수
+	int cnt = 0;//초기화
+
+	for (i = 0; i < MAX_SIZE i++) {
+		if (answer[i] == user[i])
+			cnt++;
+	}
+	return cnt;
+}
+
+int get_ball(int *answer, int *user) {
+	int i, j;
+	int cnt = 0;
+
+	for (i = 0; i < MAX_SIZE i++) {
+		for (j = 0; j < MAX_SIZE j++) {
+			if (i != j && answer[i] == user[j])//같은순서는안된다, i하고j하고
+				cnt++;
+		}
+	}
+
+	return cnt;
+}
+
+int create_num() {//숫자를받는함수
+	int rand_num;
+	int i;
+	int already_exist;//결과값저장, 초기화
+
+					  //srand(0); - > 프로그램이시작할때
+	while (1) {
+		already_exist = 0;
+		rand_num = rand() % 9 + 1;// 난수생성
+
+		for (i = 0; i < MAX_SIZE i++) {
+			if (guesswhat[i] == rand_num)
+				already_exist = 1;
+		}
+		if (already_exist != 1) {//결과값이존재하지않으면, rand_num숫자를사용한다.
+			return rand_num;
+		}
+	}
+}
+
+int create_game() {//사용
+	int i;
+	int rand_num;
+	for (i = 0; i < MAX_SIZE i++) {
+		guesswhat[i] = create_num();
+	}
+	trials = 0;
+}
