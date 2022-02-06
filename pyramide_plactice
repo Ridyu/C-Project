@@ -1,0 +1,117 @@
+#include<stdio.h>
+
+int main_for_while(void) {
+
+	//직각 삼각형 만들기
+	for (int i = 0; i < 5; i++) {
+		for (int j = 0; j <= i; j++) {
+			printf("*");
+		}
+		printf("\n");
+	}
+	printf("\n\n");
+
+	//직각 삼각형 역으로 만들기
+	for (int i = 0; i < 5; i++) {
+		for (int j = 5; j > i; j--) {
+			printf("*");
+		}
+		printf("\n");
+	}
+	printf("\n\n");
+
+	/* 공백을 집어 넣은 삼각형 만들기
+			ㅁ
+		  ㅁㅁ
+		ㅁㅁㅁ
+	  ㅁㅁㅁㅁ
+	ㅁㅁㅁㅁㅁ
+	*/
+	for (int i = 0; i < 5; i++) {
+		for (int j = 4; j >i; j--) {
+			printf(" ");
+		}
+		for (int k = 0; k <= i; k++) {
+			printf("*");
+		}
+		printf("\n");
+	}
+	printf("\n\n");
+	/*
+	ㅁㅁㅁㅁㅁ
+	  ㅁㅁㅁㅁ
+     	ㅁㅁㅁ
+	      ㅁㅁ
+			ㅁ
+	*/
+	for (int i = 0; i < 5; i++) {
+		for (int j = 1; j <=i; j++) {
+			printf(" ");
+		}
+		for (int k = i; k< 5; k++) {
+			printf("*");
+		}
+		printf("\n");
+	}
+
+	printf("\n");
+	printf("\n");
+
+	//피라미드
+	/*
+		    ㅁ
+		  ㅁㅁㅁ
+	    ㅁㅁㅁㅁㅁ
+	  ㅁㅁㅁㅁㅁㅁㅁ
+	ㅁㅁㅁㅁㅁㅁㅁㅁㅁ
+	*/
+	/*
+	ㅁㅁㅁㅁㅁㅁㅁㅁㅁ
+	  ㅁㅁㅁㅁㅁㅁㅁ
+	    ㅁㅁㅁㅁㅁ
+	      ㅁㅁㅁ
+	        ㅁ
+	*/
+
+	for (int i = 0; i < 5; i++) {
+		for (int j = 4; j > i; j--) {
+			printf(" ");
+		}
+		for (int k = 0; k < (2 * i) + 1; k++) {
+			printf("*");
+		}
+		printf("\n");
+	}
+
+
+
+
+
+
+
+
+
+
+	printf("\n\n\n\n\n\n");
+
+	//피라미드 사용자 입력
+	int input;
+	printf("만들 피라미드 층 수를 입력 : ");
+	scanf_s("%d", &input);
+
+	for (int i = 0; i < input; i++) {
+		for (int j = input - 1; j > i; j--) {
+			printf(" ");
+		}
+		for (int k = 0; k < (2 * i) + 1; k++) {
+			printf("*");
+		}
+		printf("\n");
+	}
+
+
+
+
+
+	return 0;
+}
